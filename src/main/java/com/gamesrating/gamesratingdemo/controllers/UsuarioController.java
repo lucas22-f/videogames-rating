@@ -32,11 +32,6 @@ public class UsuarioController {
     
     private final UsuarioService usuarioServicio;
     
-    @PostMapping("/register")
-    public ResponseEntity<String> crearUsuario(@RequestBody Usuario usuario) {
-        usuarioServicio.crearUsuario(usuario);
-        return ResponseEntity.status(HttpStatus.CREATED).body("User created successfully");
-    }
     @GetMapping("/get")
     public ResponseEntity<List<Usuario>> obtenerUsuarios() {
         return ResponseEntity.status(HttpStatus.OK).body(usuarioServicio.obtenerUsuarios());
