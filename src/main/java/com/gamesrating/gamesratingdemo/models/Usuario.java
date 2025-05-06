@@ -3,7 +3,6 @@ package com.gamesrating.gamesratingdemo.models;
 import java.util.Collection;
 import java.util.List;
 
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,7 +28,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Usuario implements UserDetails{
+public class Usuario implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -41,23 +41,20 @@ public class Usuario implements UserDetails{
     private com.gamesrating.gamesratingdemo.enums.Role rol;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-   @JsonManagedReference("calificacionUsuario")
+    @JsonManagedReference("usuario-calificaciones")
     List<Calificacion> listaCalificaciones;
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-   @JsonManagedReference("comentarioVideojuego")
+    @JsonManagedReference("usuario-comentarios")
     List<Comentario> listaComentarios;
-
-
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(rol.name()));
     }
+
     @Override
     public String getUsername() {
         return email;
     }
-   
-    
+
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gamesrating.gamesratingdemo.DTO.CalificacionDTO;
+import com.gamesrating.gamesratingdemo.DTO.CalificacionResponse;
 import com.gamesrating.gamesratingdemo.models.Calificacion;
 import com.gamesrating.gamesratingdemo.service.CalificacionService;
 
@@ -23,27 +24,31 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/ratings")
 @AllArgsConstructor
 public class CalificacionController {
+
     private final CalificacionService servicioCalificacion;
-     @PostMapping("/create")
+
+    @PostMapping("/create")
     public ResponseEntity<String> crearCalificacion(@RequestBody CalificacionDTO calificacionDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(servicioCalificacion.crearCalificacion(calificacionDTO));
     }
+
     @GetMapping("/get")
-    public ResponseEntity<List<Calificacion>> obtenerCalificacions() {
+    public ResponseEntity<List<CalificacionResponse>> obtenerCalificacions() {
         return ResponseEntity.status(HttpStatus.OK).body(servicioCalificacion.obtenerCalificaciones());
     }
 
-     @GetMapping("/get/{id}")
-    public Calificacion obtenerCalificacion(@PathVariable Long id) {
-        return servicioCalificacion.obtenerCalificacion(id);
+    @GetMapping("/get/{id}")
+    public ResponseEntity<CalificacionResponse> obtenerCalificacion(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(servicioCalificacion.obtenerCalificacion(id));
     }
 
     @PutMapping("/edit/{id}")
     public ResponseEntity<Calificacion> editarCalificacion(@PathVariable Long id, @RequestBody Calificacion calificacion) {
-        return ResponseEntity.status(HttpStatus.OK).body(servicioCalificacion.editarCalificacion(id,calificacion));
+        return ResponseEntity.status(HttpStatus.OK).body(servicioCalificacion.editarCalificacion(id, calificacion));
     }
+
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> eliminarCalificacion(@PathVariable Long id){
+    public ResponseEntity<String> eliminarCalificacion(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(servicioCalificacion.eliminarCalificacion(id));
     }
 

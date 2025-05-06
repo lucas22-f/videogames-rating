@@ -15,11 +15,7 @@ import lombok.RequiredArgsConstructor;
 public class UsuarioService {
     @Autowired
     private final IUsuarioRepository repositorioUsuario;
-
-    public String crearUsuario(Usuario usuario){
-        repositorioUsuario.save(usuario);
-        return "usuario creado con exito";
-    }
+    
     public Usuario editarUsuario(Long id, Usuario usuarioEditado){
         Usuario usuarioBD = repositorioUsuario.findById(id).orElse(null);
         if(usuarioBD!=null){

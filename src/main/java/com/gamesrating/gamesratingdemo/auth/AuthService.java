@@ -23,7 +23,6 @@ public class AuthService {
     private final JwtService jwtService;
     @Autowired
     private final PasswordEncoder passwordEncoder;
-
     @Autowired
     private final AuthenticationManager authenticationManager;
 

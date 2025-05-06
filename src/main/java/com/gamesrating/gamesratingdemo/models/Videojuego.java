@@ -13,11 +13,13 @@ import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Videojuego {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,11 +27,11 @@ public class Videojuego {
     private String genero;
     private String descripcion;
     private String imagenUrl;
-    @OneToMany(mappedBy = "videojuego",cascade = CascadeType.ALL,orphanRemoval = true)
-    @JsonManagedReference("videojuegoCalificaciones")
+    @OneToMany(mappedBy = "videojuego", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("videojuego-calificaciones")
     private List<Calificacion> listaCalificaciones;
-    @OneToMany(mappedBy = "videojuego",cascade = CascadeType.ALL,orphanRemoval = true)
-    @JsonManagedReference("comentarioVideojuego")
+    @OneToMany(mappedBy = "videojuego", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("videojuego-comentarios")
     private List<Comentario> listaComentarios;
-    
+
 }

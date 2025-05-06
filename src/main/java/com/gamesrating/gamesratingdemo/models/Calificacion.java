@@ -17,16 +17,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 public class Calificacion {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int puntuacion;
     @ManyToOne
-    @JoinColumn(name = "usuario_id",nullable = false)
-    @JsonBackReference("calificacionUsuario")
+    @JoinColumn(name = "usuario_id", nullable = false)
+    @JsonBackReference("usuario-calificaciones")
     private Usuario usuario;
     @ManyToOne
-    @JoinColumn(name = "videojuego_id",nullable = false)
-    @JsonBackReference("videojuegoCalificaciones")
+    @JoinColumn(name = "videojuego_id", nullable = false)
+    @JsonBackReference("videojuego-calificaciones")
     private Videojuego videojuego;
 }

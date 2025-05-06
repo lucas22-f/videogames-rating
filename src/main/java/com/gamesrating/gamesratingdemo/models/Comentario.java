@@ -21,18 +21,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 public class Comentario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String texto;
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fecha=new Date();
+    private Date fecha = new Date();
     @ManyToOne
-    @JoinColumn(name = "usuario_id",nullable = false)
-    @JsonBackReference("comentarioUsuario")
+    @JoinColumn(name = "usuario_id", nullable = false)
+    @JsonBackReference("usuario-comentarios")
     private Usuario usuario;
     @ManyToOne
-    @JoinColumn(name = "videojuego_id",nullable = false)
-    @JsonBackReference("comentarioVideojuego")
+    @JoinColumn(name = "videojuego_id", nullable = false)
+    @JsonBackReference("videojuego-comentarios")
     private Videojuego videojuego;
 }
