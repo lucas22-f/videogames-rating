@@ -44,9 +44,9 @@ public class ComentarioController {
         return comentarioService.obtenerComentario(id);
     }
 
-    @GetMapping("/get/videogame/{videogameId}")
-    public ResponseEntity<List<Comentario>> obtenerComentariosVideojuego(@PathVariable Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(comentarioService.obtenerComentarioVideojuego(id));
+    @GetMapping("/get/videogame/{videoJuegoId}")
+    public ResponseEntity<List<Comentario>> obtenerComentariosVideojuego(@PathVariable Long videoJuegoId) {
+        return ResponseEntity.status(HttpStatus.OK).body(comentarioService.obtenerComentarioVideojuego(videoJuegoId));
     }
 
     @PutMapping("/edit/{id}")

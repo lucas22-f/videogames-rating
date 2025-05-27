@@ -15,6 +15,7 @@ import com.gamesrating.gamesratingdemo.repository.IComentarioRepository;
 import com.gamesrating.gamesratingdemo.repository.IUsuarioRepository;
 import com.gamesrating.gamesratingdemo.repository.IVideoJuegoRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -29,8 +30,10 @@ public class ComentarioService {
     private final IVideoJuegoRepository videoJuegoRepository;
 
     public String crearComentario(CommentDTO comentarioDto) {
-        Videojuego videojuegoBD = videoJuegoRepository.findById(comentarioDto.getVideojuego()).orElse(null);
-        Usuario usuarioBD = usuarioRepository.findById(comentarioDto.getUsuario()).orElse(null);
+        Videojuego videojuegoBD = videoJuegoRepository.findById(comentarioDto.getVideojuego()).orElseThrow(()
+                -> new EntityNotFoundException("Videojuego No encontrado. id buscado : " + comentarioDto.getVideojuego()));
+        Usuario usuarioBD = usuarioRepository.findById(comentarioDto.getUsuario()).orElseThrow(()
+                -> new EntityNotFoundException("Usuario No Encontrado. id buscado :" + comentarioDto.getUsuario()));
         Comentario comentario = new Comentario();
         comentario.setFecha(new Date());
         comentario.setTexto(comentarioDto.getTexto());
