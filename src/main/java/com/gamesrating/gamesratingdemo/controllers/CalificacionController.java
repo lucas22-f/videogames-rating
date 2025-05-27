@@ -28,11 +28,13 @@ public class CalificacionController {
     private final CalificacionService servicioCalificacion;
 
     @PostMapping("/create")
+
     public ResponseEntity<String> crearCalificacion(@RequestBody CalificacionDTO calificacionDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(servicioCalificacion.crearCalificacion(calificacionDTO));
     }
 
     @GetMapping("/get")
+
     public ResponseEntity<List<CalificacionResponse>> obtenerCalificacions() {
         return ResponseEntity.status(HttpStatus.OK).body(servicioCalificacion.obtenerCalificaciones());
     }

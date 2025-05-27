@@ -49,7 +49,7 @@ public class Oauth2SuccesHandler implements AuthenticationSuccessHandler {
             nuevUsuario.setPassword(passwordEncoder.encode((UUID.randomUUID().toString())));
             nuevUsuario.setListaCalificaciones(new ArrayList<>());
             nuevUsuario.setListaComentarios(new ArrayList<>());
-            nuevUsuario.setRol(Role.USER);
+            nuevUsuario.setRol(email.equals("lucas.200061@gmail.com") ? Role.ADMIN : Role.USER);
 
             return repositorioUsuario.save(nuevUsuario);
 

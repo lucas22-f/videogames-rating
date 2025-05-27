@@ -1,5 +1,6 @@
 package com.gamesrating.gamesratingdemo.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class ComentarioService {
+
     @Autowired
     private final IComentarioRepository comentarioRepository;
     @Autowired
@@ -26,8 +28,7 @@ public class ComentarioService {
     @Autowired
     private final IVideoJuegoRepository videoJuegoRepository;
 
-
-    public String crearComentario(CommentDTO comentarioDto){
+    public String crearComentario(CommentDTO comentarioDto) {
         Videojuego videojuegoBD = videoJuegoRepository.findById(comentarioDto.getVideojuego()).orElse(null);
         Usuario usuarioBD = usuarioRepository.findById(comentarioDto.getUsuario()).orElse(null);
         Comentario comentario = new Comentario();
@@ -39,20 +40,29 @@ public class ComentarioService {
 
         return "Comentario creado con exito";
     }
-    public List<Comentario> obtenerComentarios(){
+
+    public List<Comentario> obtenerComentarioVideojuego(Long idVideojuego) {
+        Videojuego videojuego = videoJuegoRepository.findById(idVideojuego).orElse(null);
+        return videojuego != null ? videojuego.getListaComentarios() : new ArrayList<>();
+    }
+
+    public List<Comentario> obtenerComentarios() {
         return comentarioRepository.findAll();
     }
-    public Comentario editarComentario(Long id, Comentario comentarioEditado){
+
+    public Comentario editarComentario(Long id, Comentario comentarioEditado) {
         Comentario comentarioBD = comentarioRepository.findById(id).orElse(null);
-        if(comentarioBD!=null){
+        if (comentarioBD != null) {
             return comentarioRepository.save(comentarioEditado);
         }
         return null;
     }
-    public Comentario obtenerComentario(Long id){
+
+    public Comentario obtenerComentario(Long id) {
         return comentarioRepository.findById(id).orElse(null);
     }
-    public String eliminarComentario(Long id){
+
+    public String eliminarComentario(Long id) {
         comentarioRepository.deleteById(id);
         return "Comentario eliminado con exito";
     }

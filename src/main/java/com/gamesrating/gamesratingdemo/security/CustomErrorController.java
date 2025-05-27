@@ -27,7 +27,7 @@ public class CustomErrorController implements ErrorController {
             case 401 ->
                 "No autorizado";
             case 403 ->
-                "Error jwt incompatible";
+                "Error jwt incompatible o inexistente";
             default ->
                 "Error inesperado";
         };
